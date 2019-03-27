@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.StdCtrls;
 
 type
   TuFo4DelphiPrincipal = class(TForm)
@@ -12,9 +12,13 @@ type
     mmExperimentos: TMenuItem;
     mmLANWAN: TMenuItem;
     mmWIFI: TMenuItem;
+    mmo1: TMemo;
     procedure mmWIFIClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure mmo1DblClick(Sender: TObject);
   private
     { Private declarations }
+
   public
     { Public declarations }
   end;
@@ -28,6 +32,16 @@ uses
   uWiFiTestes;
 
 {$R *.dfm}
+
+procedure TuFo4DelphiPrincipal.FormCreate(Sender: TObject);
+begin
+ mmo1.Clear;
+end;
+
+procedure TuFo4DelphiPrincipal.mmo1DblClick(Sender: TObject);
+begin
+ mmo1.Clear;
+end;
 
 procedure TuFo4DelphiPrincipal.mmWIFIClick(Sender: TObject);
 begin

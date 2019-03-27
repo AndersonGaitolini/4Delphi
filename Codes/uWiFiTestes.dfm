@@ -11,6 +11,8 @@ object uFoWifiTestes: TuFoWifiTestes
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnClose = FormClose
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object btnDescobrirWifi: TButton
@@ -20,6 +22,7 @@ object uFoWifiTestes: TuFoWifiTestes
     Height = 25
     Caption = 'Descobrir Wifi'
     TabOrder = 0
+    OnClick = btnDescobrirWifiClick
   end
   object edtShow: TEdit
     Left = 176

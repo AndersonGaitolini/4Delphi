@@ -12,8 +12,24 @@ object uFo4DelphiPrincipal: TuFo4DelphiPrincipal
   Font.Style = []
   Menu = mmMenu4Delphi
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
+  object mmo1: TMemo
+    Left = 0
+    Top = 0
+    Width = 530
+    Height = 438
+    Align = alClient
+    Lines.Strings = (
+      'mmo1')
+    TabOrder = 0
+    OnDblClick = mmo1DblClick
+    ExplicitLeft = 72
+    ExplicitTop = 88
+    ExplicitWidth = 185
+    ExplicitHeight = 89
+  end
   object mmMenu4Delphi: TMainMenu
     Left = 224
     Top = 208

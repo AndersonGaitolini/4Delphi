@@ -5,7 +5,7 @@ uses
   System.SysUtils,
   System.Classes,
   nduWlanAPI,  // in 'nduWlanAPI.pas',
-  nduWlanTypes; //in 'nduWlanTypes.pas';
+  nduWlanTypes, System.TypInfo; //in 'nduWlanTypes.pas';
 
 
 //You may require the headers at:
@@ -22,35 +22,70 @@ uses
     FAuthAlgorithm2 : string;
 
   public
-    property InterfaceName  : string;   read FInterfaceName  write FInterfaceName  ;
-    property Guide          : string;   read FGuide          write FGuide          ;
-    property Profile        : string;   read FProfile        write FProfile        ;
-    property NetworkName    : string;   read FNetworkName    write FNetworkName    ;
-    property SignalQuality  : Currency; read FSignalQuality  write FSignalQuality  ;
-    property AuthAlgorithm1 : string;   read FAuthAlgorithm1 write FAuthAlgorithm1 ;
-    property AuthAlgorithm2 : string;   read FAuthAlgorithm2 write FAuthAlgorithm2 ;
+    property InterfaceName  : string   read FInterfaceName  write FInterfaceName  ;
+    property Guide          : string   read FGuide          write FGuide          ;
+    property Profile        : string   read FProfile        write FProfile        ;
+    property NetworkName    : string   read FNetworkName    write FNetworkName    ;
+    property SignalQuality  : Currency read FSignalQuality  write FSignalQuality  ;
+    property AuthAlgorithm1 : string   read FAuthAlgorithm1 write FAuthAlgorithm1 ;
+    property AuthAlgorithm2 : string   read FAuthAlgorithm2 write FAuthAlgorithm2 ;
 
-    constructor Create; override;
-    destructor Destroy; override;
+    constructor Create;
+    destructor Destroy;
   end;
 
 
   type TDetectarWifi = class(TObject)
-  private
 
-    function fDOT11_AUTH_ALGORITHM_To_String( Dummy :Tndu_DOT11_AUTH_ALGORITHM):String;
   public
     function fScan: TStringlist;
-    constructor Create; override;
-    destructor Destroy; override;
+    constructor Create;
+    destructor Destroy;
   end;
 
+     function fDOT11_AUTH_ALGORITHM_To_String( Dummy :Tndu_DOT11_AUTH_ALGORITHM):String;
+    function fDOT11_CIPHER_ALGORITHM_To_String( Dummy :Tndu_DOT11_CIPHER_ALGORITHM):String;
 
 implementation
 
-uses
 
-function fDOT11_AUTH_ALGORITHM_To_String( Dummy :Tndu_DOT11_AUTH_ALGORITHM):String;
+
+{ TConexaoWifi }
+
+constructor TConexaoWifi.Create;
+begin
+  inherited;
+
+end;
+
+destructor TConexaoWifi.Destroy;
+begin
+
+  inherited;
+end;
+
+{ TDetectarWifi }
+
+constructor TDetectarWifi.Create;
+begin
+  inherited;
+
+end;
+
+destructor TDetectarWifi.Destroy;
+begin
+
+  inherited;
+end;
+
+
+function TDetectarWifi.fScan: TStringlist;
+begin
+
+end;
+
+
+function fDOT11_AUTH_ALGORITHM_To_String(Dummy: Tndu_DOT11_AUTH_ALGORITHM): String;
 begin
     Result:='';
     case Dummy of
@@ -66,7 +101,8 @@ begin
     end;
 end;
 
-function fDOT11_CIPHER_ALGORITHM_To_String( Dummy :Tndu_DOT11_CIPHER_ALGORITHM):String;
+function fDOT11_CIPHER_ALGORITHM_To_String(
+  Dummy: Tndu_DOT11_CIPHER_ALGORITHM): String;
 begin
     Result:='';
     case Dummy of
@@ -136,10 +172,10 @@ begin
            SDummy:=PChar(@pAvailableNetworkList^.Network[j].dot11Ssid.ucSSID);
            WriteLn(Format('NetworkName     %s',[SDummy]));
            WriteLn(Format('Signal Quality  %d ',[pAvailableNetworkList^.Network[j].wlanSignalQuality])+'%');
-           //SDummy := GetEnumName(TypeInfo(Tndu_DOT11_AUTH_ALGORITHM),integer(pAvailableNetworkList^.Network[j].dot11DefaultAuthAlgorithm)) ;
-           SDummy:=fDOT11_AUTH_ALGORITHM_To_String(pAvailableNetworkList^.Network[j].dot11DefaultAuthAlgorithm);
+           //SDummy := GetEnumName(TypeInfo(Tndu_DOT11_AUTH_ALGORITHM), integer(pAvailableNetworkList^.Network[j].dot11DefaultAuthAlgorithm)) ;
+           SDummy:= fDOT11_AUTH_ALGORITHM_To_String(pAvailableNetworkList^.Network[j].dot11DefaultAuthAlgorithm);
            WriteLn(Format('Auth Algorithm  %s ',[SDummy]));
-           SDummy:=fDOT11_CIPHER_ALGORITHM_To_String(pAvailableNetworkList^.Network[j].dot11DefaultCipherAlgorithm);
+           SDummy:= fDOT11_CIPHER_ALGORITHM_To_String(pAvailableNetworkList^.Network[j].dot11DefaultCipherAlgorithm);
            WriteLn(Format('Auth Algorithm  %s ',[SDummy]));
            Writeln('');
         end;
@@ -154,45 +190,6 @@ begin
   finally
     FreeAndNil(wLista);
   end;
-
-end;
-
-{ TConexaoWifi }
-
-constructor TConexaoWifi.Create;
-begin
-  inherited;
-
-end;
-
-destructor TConexaoWifi.Destroy;
-begin
-
-  inherited;
-end;
-
-{ TDetectarWifi }
-
-constructor TDetectarWifi.Create;
-begin
-  inherited;
-
-end;
-
-destructor TDetectarWifi.Destroy;
-begin
-
-  inherited;
-end;
-
-function TDetectarWifi.fDOT11_AUTH_ALGORITHM_To_String(
-  Dummy: Tndu_DOT11_AUTH_ALGORITHM): String;
-begin
-
-end;
-
-function TDetectarWifi.fScan: TStringlist;
-begin
 
 end;
 
